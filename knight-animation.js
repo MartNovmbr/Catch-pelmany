@@ -17,7 +17,7 @@ const KNIGHT_FEET_X_SHIFT=24;
 const KNIGHT_FEET_Y_SHIFT=8;
 // Path coordinates describe the centres of stepping stones, not the character head.
 const KNIGHT_VERTICAL_OFFSET=0;
-const KNIGHT_ASSETS={idle:'assets/knight_idle.png',walk:'assets/knight_walk.png',final:'assets/final_couple.png'};
+const KNIGHT_ASSETS={idle:'knight_idle.png',walk:'knight_walk.png',final:'final_couple.png'};
 // Engine state: -1 all locked; 0 first open; 1 first finished, second open; ...; 5 complete.
 let journeyStage=-1; let knightAnimation=null;
 function knightNodeImage(file, className){
@@ -49,7 +49,7 @@ function setStage(newStage,{animate=true}={}){
  document.querySelectorAll('.level').forEach(el=>el.remove());
  const map=document.getElementById('map');
  const points=[[170,989],[282,744],[466,561],[605,364],[800,265]];
- points.forEach(([x,y],i)=>{const state=i<newStage?'completed':i===newStage?'open':'locked';const marker=document.createElement('img');marker.className='level';marker.src='assets/level_'+(i+1)+'_'+state+'.png';marker.alt='Level '+(i+1)+': '+state;marker.style.left=(x/941*100)+'%';marker.style.top=(y/1672*100)+'%';map.appendChild(marker);});
+ points.forEach(([x,y],i)=>{const state=i<newStage?'completed':i===newStage?'open':'locked';const marker=document.createElement('img');marker.className='level';marker.src='level_'+(i+1)+'_'+state+'.png';marker.alt='Level '+(i+1)+': '+state;marker.style.left=(x/941*100)+'%';marker.style.top=(y/1672*100)+'%';map.appendChild(marker);});
  const sprite=document.getElementById('knight-sprite');const couple=document.getElementById('final-couple');sprite.hidden=true;couple.hidden=true;
  if(newStage===5){couple.hidden=false;knightPlace(couple,790,234);}
  else if(newStage>=0){sprite.hidden=false;let [x,y]=points[newStage];knightPlace(sprite,x+KNIGHT_FEET_X_SHIFT,y+KNIGHT_FEET_Y_SHIFT+KNIGHT_VERTICAL_OFFSET);sprite.src=KNIGHT_ASSETS.idle;sprite.style.transform='translate(-50%,-100%)';

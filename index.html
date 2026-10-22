@@ -45,7 +45,7 @@ body{margin:0;background:linear-gradient(180deg,#1f1713,#2b241f);font-family:sys
 .dot{width:10px;height:10px;border-radius:50%;background:#d6c1aa;box-shadow:inset 0 1px 2px rgba(0,0,0,.15)}
 .dot.done{background:#6ab571}.dot.current{background:#f0b741}
 #mapView{display:none}
-.mapWrap{position:relative;aspect-ratio:941/1672;background-image:url('assets/map_base_reconstructed.png');background-size:100% 100%;background-repeat:no-repeat}
+.mapWrap{position:relative;aspect-ratio:941/1672;background-image:url('map_base_reconstructed.png');background-size:100% 100%;background-repeat:no-repeat}
 .mapWrap > img{position:absolute}
 .board{left:26.04%;top:.84%;width:48.03%}
 .level{width:11.26%;transform:translate(-50%,-50%)}
@@ -63,7 +63,7 @@ body{margin:0;background:linear-gradient(180deg,#1f1713,#2b241f);font-family:sys
 <body>
 <div id="app">
   <section id="storyView" class="panel">
-    <div class="sceneFrame"><img id="storyImg" src="assets/scene1.png" alt="Story scene"></div>
+    <div class="sceneFrame"><img id="storyImg" src="scene1.png" alt="Story scene"></div>
     <div id="authorBar">
       <div id="authorTextWrap">
         <div id="authorLabel">Narrator</div>
@@ -96,9 +96,9 @@ body{margin:0;background:linear-gradient(180deg,#1f1713,#2b241f);font-family:sys
 
   <section id="mapView" class="panel">
     <div class="mapWrap" id="map">
-      <img class="board" alt="Dahlenburgs' story title" src="assets/title_board.png">
-      <img id="knight-sprite" class="knightSprite" src="assets/knight_idle.png" hidden>
-      <img id="final-couple" class="coupleSprite" src="assets/final_couple.png" hidden>
+      <img class="board" alt="Dahlenburgs' story title" src="title_board.png">
+      <img id="knight-sprite" class="knightSprite" src="knight_idle.png" hidden>
+      <img id="final-couple" class="coupleSprite" src="final_couple.png" hidden>
     </div>
     <div id="mapBottom">
       <div style="flex:1">
@@ -111,9 +111,9 @@ body{margin:0;background:linear-gradient(180deg,#1f1713,#2b241f);font-family:sys
 </div>
 <script>
 const scenes = [
-  {img:'assets/scene1.png', author:"This is Clinton. One day, between work tasks, he decided to meet someone new..."},
-  {img:'assets/scene2.png', author:"He saw a beautiful girl from Russia and instantly fell for her..."},
-  {img:'assets/scene3.png', author:"Since then, they stayed in touch all the time, and the heroic journey to Moscow began..."}
+  {img:'scene1.png', author:"This is Clinton. One day, between work tasks, he decided to meet someone new..."},
+  {img:'scene2.png', author:"He saw a beautiful girl from Russia and instantly fell for her..."},
+  {img:'scene3.png', author:"Since then, they stayed in touch all the time, and the heroic journey to Moscow began..."}
 ];
 let sceneIndex = 0;
 const storyView=document.getElementById('storyView');
@@ -166,5 +166,13 @@ function showMapAfterWin(){ visaView.style.display='none'; mapView.style.display
 document.getElementById('replayVisa').addEventListener('click', ()=>{ mapView.style.display='none'; miniIntro.style.display='block'; });
 </script>
 <script src="knight-animation.js"></script>
+<script>
+// Reserved level-5 entry point; previous levels must be completed before enabling it.
+document.getElementById('map').addEventListener('click', function(event) {
+  const marker = event.target.closest('img.level');
+  if (!marker || !/level_5_open\.png$/.test(marker.getAttribute('src') || '')) return;
+  window.location.href = 'pelmeni.html';
+});
+</script>
 </body>
 </html>
